@@ -3,10 +3,11 @@ from pydantic import BaseModel
 from enum import Enum
 import logging
 from groq import Groq
-#import os
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 logging.basicConfig(
     level=logging.INFO, format="[%(levelname)s] %(asctime)s: %(message)s"
@@ -274,6 +275,7 @@ def operacao(numero: Numeros, tipo: TipoOperacao):
 # # Retorne a resposta para o usuário
 
 
+
 def executar_prompt(tema: str):
     """
     Gera uma história em português brasileiro sobre um tema específico usando a API Groq.
@@ -285,7 +287,7 @@ def executar_prompt(tema: str):
     prompt = f"Escreva uma história em pt-br sobre o {tema}"
 
     client = Groq(
-        api_key='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',
+        api_key=os.getenv("GROQ_API_KEY"),
     )
 
     chat_completion = client.chat.completions.create(
